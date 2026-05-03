@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[project]
+name = "deteccion-planos"
+dynamic = ["version"]
+description = "Libreria para la extraccion de caracteristicas estructurales en planos arquitectonicos"
+dependencies = [
+    "opencv-python",
+    "numpy",
+    "matplotlib",
+]
+requires-python = ">=3.12"
+authors = [
+  {name = "HAN APESS ESPARZA, ARMANDO DUARTE ESPARZA, IKER EDUARDO FIGUEROA GARCIA, JOSE IVAN RODRIGUEZ VALTIERRA", email = "al261458@edu.uaa.mx"},
+]
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]

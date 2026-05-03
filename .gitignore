@@ -1,0 +1,16 @@
+# Entornos virtuales
+.venv/
+env/
+venv/
+
+# Python compilado
+**/__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Distribución
+dist/
+build/
+*.egg-info/
