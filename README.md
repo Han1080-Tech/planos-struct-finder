@@ -62,6 +62,27 @@ python -m venv .venv
 ```bash
 .\.venv\Scripts\activate
 ```
+### 💡 Nota para usuarios de Spyder:
+Para que la librería funcione correctamente, debes vincular el entorno virtual del proyecto:
+
+Ve a Tools -> Preferences -> Python interpreter.
+
+Selecciona Use the following Python interpreter.
+
+Busca la ruta de tu carpeta: planos-struct-finder/.venv/Scripts/python.exe.
+
+Reinicia la consola de Spyder.
+
+### 💡 Note for Spyder users:
+To ensure the library works correctly, you must link the project's virtual environment:
+
+Go to Tools -> Preferences -> Python interpreter.
+
+Select Use the following Python interpreter.
+
+Browse to your project folder and select the environment's executable: planos-struct-finder/.venv/Scripts/python.exe.
+
+Restart the Spyder console.
 
 4. Entrar a la carpeta (¡IMPORTANTE!) / Enter the folder (IMPORTANT!):
 
