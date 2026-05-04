@@ -7,24 +7,58 @@ Architectural floor plan analysis using Computer Vision.
 
 
 
-
-
 ## 📝 Descripción / Description
 
 ES: Esta librería permite procesar planos arquitectónicos escaneados para corregir su inclinación, eliminar ruido (muebles, cotas, texto) y detectar automáticamente los muros y esquinas estructurales.
 
 EN: This library processes scanned architectural plans to correct tilt, remove noise (furniture, dimensions, text), and automatically detect structural walls and corners.
 
-## Versión necesaria de Pyhton / Required version of Python
+## 🛠️ Requisitos Previos / Prerequisites
+#### ES: 
 
-3.12+
+Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
 
+Git: Necesario para clonar el repositorio y gestionar las versiones del proyecto. Puedes descargarlo en git-scm.com.
+
+Python 3.12+: El lenguaje base utilizado para el desarrollo de esta librería de visión artificial.
+
+Editor de código: Se recomienda Visual Studio Code para una mejor experiencia de desarrollo.
+
+#### EN: 
+
+Before starting, make sure you have the following installed on your system:
+
+Git: Required to clone the repository and manage project versions. Download it at git-scm.com.
+
+Python 3.12+: The base language used for this computer vision library.
+
+Code Editor: Visual Studio Code is recommended for the best development experience.
+#### 
+
+ES: Puedes verificar que tienes todo listo ejecutando estos comandos en tu terminal:
+
+EN: You can verify everything is ready by running these commands in your terminal:
+
+```bash
+git --version
+python --version
+```
 ## 🚀 Instalación/Installation
 
-ES: Para instalar la librería de forma local, clona este repositorio y ejecuta:
+ES: Para instalar la librería de forma local, clona este repositorio, sigue estos pasos:
+EN: To install the library locally, clone this repository, follow these steps:
 
-EN: To install the library locally, clone this repository and run:
+1. Clonar el repositorio / Clone the repository:
+```bash
+git clone https://github.com/Han1080-Tech/planos-struct-finder.git
+```
 
+2. Entrar a la carpeta (¡IMPORTANTE!) / Enter the folder (IMPORTANT!):
+
+```bash
+cd planos-struct-finder
+```
+Instalar en modo ejecutable / Install in editable mode:
 ```bash
 pip install -e .
 ```
@@ -63,19 +97,20 @@ EN: Copy this code into your mi_analisis.py file. It is designed to automaticall
 
 ```
 import vision
-mport cv2
+import cv2
 import os
 
 # CONFIGURACIÓN / SETTINGS
-NOMBRE_IMAGEN = "mi_plano.png" 
+# Cambia el nombre de la imagen que deseas analizar / Change the name of the image you want to analyze
+NOMBRE_IMAGEN = "Plano_Casa.jpg"  
 
 # LÓGICA AUTOMÁTICA / AUTOMATIC LOGIC 
-base_path = os.path.dirname(os.path.abspath(__file__))
+base_path = os.path.dirname(os.path.abspath(_file_))
 ruta_final = os.path.join(base_path, NOMBRE_IMAGEN)
 
 try:
     recto, limpia = vision.preparar_plano(ruta_final)
-    resultado = vision.detectar_caracteristicas(limpia, recto)
+    resultado = vision.detectar_caracteristicas(recto, limpia)
 
     print(f"✅ Analizando / Analizing : {NOMBRE_IMAGEN}")
     cv2.imshow('Deteccion Estructural - Vision Artificial', resultado)
