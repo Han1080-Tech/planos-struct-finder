@@ -5,8 +5,6 @@ Análisis estructural de planos mediante Visión Artificial.
 
 Architectural floor plan analysis using Computer Vision.
 
-
-
 ## 📝 Descripción / Description
 
 ES: Esta librería permite procesar planos arquitectónicos escaneados para corregir su inclinación, eliminar ruido (muebles, cotas, texto) y detectar automáticamente los muros y esquinas estructurales.
@@ -58,12 +56,25 @@ git clone https://github.com/Han1080-Tech/planos-struct-finder.git
 ```bash
 cd planos-struct-finder
 ```
-Instalar en modo ejecutable / Install in editable mode:
+ES: Una vez dentro de la carpeta, es fundamental activar un entorno virtual para mantener las dependencias aisladas.
+
+EN: Once inside the folder, it is essential to activate a virtual environment to keep dependencies isolated.
+
+1. Crear el entorno / Create environment:
+```bash
+python -m venv .venv
+```
+2. Activar el entorno / Activate environment:
+```bash
+.\.venv\Scripts\activate
+```
+3. Instalar en modo ejecutable / Install in editable mode:
 ```bash
 pip install -e .
 ```
     
 ## 💻 Cómo usar / How to use
+
 
 ES: Para que el programa encuentre tus imágenes sin errores, organiza tus archivos así:
 
@@ -73,7 +84,7 @@ EN: To ensure the program finds your images without errors, organize your files 
 nombre-de-tu-proyecto/ 
 name-of-your-proyect/
 
-    ├── src/
+    ├── planos-struct-finder
 
     │   └── vision/             <-- Código base (No tocar / Do not touch)
 
@@ -82,6 +93,7 @@ name-of-your-proyect/
     └── mi_plano.png             <-- Tu imagen (Ponla aquí / Place it here)
 
 ```
+<img src="https://github.com/user-attachments/assets/f3bd5a2f-6f61-4059-a3c0-f7c275e26c3f" width="600">
 
 ### Nota / Note:
 
@@ -105,7 +117,7 @@ import os
 NOMBRE_IMAGEN = "Plano_Casa.jpg"  
 
 # LÓGICA AUTOMÁTICA / AUTOMATIC LOGIC 
-base_path = os.path.dirname(os.path.abspath(_file_))
+base_path = os.path.dirname(os.path.abspath(__file__))
 ruta_final = os.path.join(base_path, NOMBRE_IMAGEN)
 
 try:
