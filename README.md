@@ -43,32 +43,34 @@ python --version
 ```
 ## 🚀 Instalación/Installation
 
-ES: Para instalar la librería de forma local, clona este repositorio, sigue estos pasos:
-EN: To install the library locally, clone this repository, follow these steps:
+ES: Para instalar la librería de forma local, sigue estos pasos:
+EN: To install the library locally, follow these steps:
 
 1. Clonar el repositorio / Clone the repository:
 ```bash
 git clone https://github.com/Han1080-Tech/planos-struct-finder.git
 ```
+ES: Activa un entorno virtual para mantener las dependencias aisladas.
 
-2. Entrar a la carpeta (¡IMPORTANTE!) / Enter the folder (IMPORTANT!):
+EN: It is essential to activate a virtual environment to keep dependencies isolated.
 
-```bash
-cd planos-struct-finder
-```
-ES: Una vez dentro de la carpeta, es fundamental activar un entorno virtual para mantener las dependencias aisladas.
-
-EN: Once inside the folder, it is essential to activate a virtual environment to keep dependencies isolated.
-
-1. Crear el entorno / Create environment:
+2. Crear el entorno / Create environment:
 ```bash
 python -m venv .venv
 ```
-2. Activar el entorno / Activate environment:
+3. Activar el entorno / Activate environment:
 ```bash
 .\.venv\Scripts\activate
 ```
-3. Instalar en modo ejecutable / Install in editable mode:
+
+4. Entrar a la carpeta (¡IMPORTANTE!) / Enter the folder (IMPORTANT!):
+
+```bash
+
+cd planos-struct-finder
+```
+
+5. Instalar en modo ejecutable / Install in editable mode:
 ```bash
 pip install -e .
 ```
@@ -107,6 +109,9 @@ ES: Copia este código en tu archivo mi_analisis.py. Está diseñado para detect
 
 EN: Copy this code into your mi_analisis.py file. It is designed to automatically detect your image path:
 
+### ES: (Cambia el nombre de la imagen si es necesario)
+### EN: (Change the image name if necessary)
+
 ```
 import vision
 import cv2
@@ -114,7 +119,7 @@ import os
 
 # CONFIGURACIÓN / SETTINGS
 # Cambia el nombre de la imagen que deseas analizar / Change the name of the image you want to analyze
-NOMBRE_IMAGEN = "Plano_Casa.jpg"  
+NOMBRE_IMAGEN = "mi_plano.png"  
 
 # LÓGICA AUTOMÁTICA / AUTOMATIC LOGIC 
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -139,7 +144,7 @@ ES:
 ### 🧪 Cómo probar los ejemplos incluidos
 Para demostrar la versatilidad de la librería, hemos incluido 3 ejemplos de procesamiento. Estos archivos se encuentran dentro del paquete para pruebas inmediatas.
 
-1. Abre el archivo Libreria.py.
+1. Abre el archivo Libreria.py que se encuentra dentro de planos-struct-finder.
 
 2. En la sección de rutas (esta marcado con un comentario que es lo unico que debes modificar.) asegúrate de que solo una línea no tenga el símbolo #.
 
@@ -149,7 +154,7 @@ EN:
 ### 🧪 How to test the included examples
 To demonstrate the library's versatility, we have included 3 processing examples. These files are included within the package for immediate testing.
 
-1. Open the Libreria.py file.
+1. Open the Libreria.py file which is found within planes-struct-finder..
 
 2. In the paths section (This is marked with a comment, which is the only thing you need to modify.) ensure that only one line does not have the # symbol.
 
