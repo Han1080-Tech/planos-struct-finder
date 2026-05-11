@@ -134,36 +134,90 @@ EN: Copy this code into your mi_analisis.py file. It is designed to automaticall
 ### EN: (Change the image name if necessary)
 
 ```
-import vision
 import cv2
+import matplotlib.pyplot as plt
 import os
+import tkinter as tk
+from tkinter import messagebox
+from vision.deteccion import ProcesadorPlanos
 
-# CONFIGURACIÓN / SETTINGS
-# Cambia el nombre de la imagen que deseas analizar / Change the name of the image you want to analyze
-NOMBRE_IMAGEN = "mi_plano.png"  
+# ==========================================================
+# 1. CONFIGURACION DE USUARIO (Cambia el nombre aqui)
+# No necesitas cambiar nada mas, el codigo esta diseñado para 
+# ser lo mas automatico posible, solo asegurate de que el nombre 
+# del archivo sea correcto y que la imagen este en la misma 
+# carpeta que este script   
+# ==========================================================
+ARCHIVO_DE_IMAGEN = "Plano_4.png"                         #= <-- Cambia el nombre del archivo de imagen aqui (ejemplo: "Plano_1.png")
+# ==========================================================
 
-# LÓGICA AUTOMÁTICA / AUTOMATIC LOGIC 
-base_path = os.path.dirname(os.path.abspath(__file__))
-ruta_final = os.path.join(base_path, NOMBRE_IMAGEN)
+#Crear pantalla de error personalizada para mostrar mensajes de error de forma mas amigable y como solucionarlo
+def mostrar_error(mensaje):
+    root = tk.Tk()
+    root.withdraw() 
+    messagebox.showerror("Error de Archivo", mensaje)
+    root.destroy()
 
-try:
-    recto, limpia = vision.preparar_plano(ruta_final)
-    resultado = vision.detectar_caracteristicas(recto, limpia)
+def ejecutar_analisis():
+    # Verificar si el archivo existe
+    if not os.path.exists(ARCHIVO_DE_IMAGEN):
+        mensaje = (f"No se encontro la imagen: '{ARCHIVO_DE_IMAGEN}'\n\n"
+                   "Por favor, revisa:\n"
+                   "1. Que el nombre este bien escrito.\n"
+                   "2. Que la imagen este en la misma carpeta que este script.\n"
+                   "3. Que la extension sea la correcta.")
+        mostrar_error(mensaje)
+        return
 
-    print(f"✅ Analizando / Analizing : {NOMBRE_IMAGEN}")
-    cv2.imshow('Deteccion Estructural - Vision Artificial', resultado)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    try:
+        # Procesamiento de la imagen usando la clase ProcesadorPlanos, esto hace que el codigo principal sea mas limpio
+        procesador = ProcesadorPlanos(ARCHIVO_DE_IMAGEN)
+        final = procesador.ejecutar()
 
-except Exception as e:
-    print(f"❌ Error: No se pudo procesar / Error: Could not be processed '{NOMBRE_IMAGEN}'. \nDetalle: {e}")
+        # Configurar la ventana de visualización
+        fig = plt.figure(figsize=(10, 10))
+        
+        # Título de la ventana
+        fig.canvas.manager.set_window_title(f"Visualizador de Planos: {ARCHIVO_DE_IMAGEN}")
+        
+        # Enseñar la imagen procesada con un título que incluya el nombre del archivo
+        plt.imshow(cv2.cvtColor(final, cv2.COLOR_BGR2RGB))
+        plt.title(f"IMAGEN PROCESADA CON LOS BORDES Y ESQUINAS", fontsize=18, fontweight='bold', color='Purple')
+        plt.axis('off')
+        plt.show()
+        
+
+    except Exception as e:
+        mostrar_error(f"Ocurrio un error inesperado al procesar la imagen:\n{str(e)}")
+
+if __name__ == "__main__":
+    ejecutar_analisis()
 ```
+### ES: Solución de Problemas (Pantalla Emergente)
+Si el sistema no logra detectar la imagen, se desplegará automáticamente un asistente visual que te sugerirá lo siguiente:
+
+Ubicación: Verifica que la imagen esté en el mismo directorio que el script de pruebas.
+
+Sintaxis: Asegúrate de que el nombre esté escrito exactamente igual en el código (respetando mayúsculas y guiones).
+
+Existencia: Confirma que el archivo realmente existe y no ha sido movido o borrado.
+
+### EN:Troubleshooting (Popup Window)
+If the system fails to detect the image, a visual assistant will automatically appear, suggesting the following:
+
+Location: Verify that the image is in the same directory as the test script.
+
+Syntax: Ensure the filename is written exactly as it appears in the code (respecting case and hyphens).
+
+Existence: Confirm that the file actually exists and hasn't been moved or deleted.
+
+<img src="https://github.com/user-attachments/assets/c4ff78ad-3e4b-4a79-a539-bff92d9e5267" width="600">
 
 ## 📊 Resultados / Results 
 
 ES:
 ### 🧪 Cómo probar los ejemplos incluidos
-Para demostrar la versatilidad de la librería, hemos incluido 3 ejemplos de procesamiento. Estos archivos se encuentran dentro del paquete para pruebas inmediatas.
+Para demostrar la versatilidad de la librería, hemos incluido 4 ejemplos de procesamiento. Estos archivos se encuentran dentro del paquete para pruebas inmediatas.
 
 1. Abre el archivo Libreria.py que se encuentra dentro de planos-struct-finder.
 
@@ -182,13 +236,16 @@ To demonstrate the library's versatility, we have included 3 processing examples
 3. Save the file and run: python Libreria.py.
 
 ### Ejemplo / Example 1:
-<img src="https://github.com/user-attachments/assets/cd58dd7f-d05a-4065-9e1c-4482341d42a9" width="600">
+<img src="https://github.com/user-attachments/assets/fe09e972-049a-44e7-a73d-c67ee2330a78" width="600">
 
 ### Ejemplo / Example 2:
-<img src="https://github.com/user-attachments/assets/0de732b2-50af-4b2a-af70-5f8e8c974c1d" width="600">
+<img src="https://github.com/user-attachments/assets/bc1b9a89-d6e3-4649-a6da-bfd5765b1173" width="600">
 
 ### Ejemplo / Example 3:
-<img src="https://github.com/user-attachments/assets/429604ba-5b28-43a0-97e7-ce05679986c9" width="600">
+<img src="https://github.com/user-attachments/assets/db38553e-1a44-43c5-9237-1a8714e72e49" width="600">
+
+### Ejemplo / Example 4:
+<img src="https://github.com/user-attachments/assets/b1c814c6-0388-4e56-be66-4c61e8324d7f" width="600">
 
 ## 👥 Equipo / Team
 

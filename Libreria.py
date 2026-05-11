@@ -1,49 +1,60 @@
 import cv2
-import numpy as np
-from src.vision.procesamiento import Preparar_Plano
-from src.vision.deteccion import Detectar_caracteristicas
+import matplotlib.pyplot as plt
 import os
+import tkinter as tk
+from tkinter import messagebox
+from vision.deteccion import ProcesadorPlanos
 
-#Mandamos a llamar la funcion para que cualquier persona pueda usar el codigo sin importar su sistema operativo o donde lo tenga guardado
-#We called the function so that anyone can use the code regardless of their operating system or where they have it stored.
-Directorio_Actual = os.path.dirname(os.path.abspath(__file__))
+# ==========================================================
+# 1. CONFIGURACION DE USUARIO (Cambia el nombre aqui)
+# Solo debes de cambiar el # al archivu que quieras ver de ejemplo
+# Asegurate que los otros tres ARCHIVO_DDE_IMAGEN esten comentados para evitar confusiones, 
+# y que el que quieras usar este sin comentar
+# ==========================================================
+ARCHIVO_DE_IMAGEN = "Plano_1.png"                         #= <-- Cambia el # ddependiendo del plano que quieras analizar
+#ARCHIVO_DE_IMAGEN = "Plano_2.jpg"   
+#ARCHIVO_DE_IMAGEN = "Plano_3.jpg"   
+#ARCHIVO_DE_IMAGEN = "Plano_4.png"   
+# ==========================================================
 
+#Crear pantalla de error personalizada para mostrar mensajes de error de forma mas amigable y como solucionarlo
+def mostrar_error(mensaje):
+    root = tk.Tk()
+    root.withdraw() 
+    messagebox.showerror("Error de Archivo", mensaje)
+    root.destroy()
 
+def ejecutar_analisis():
+    # Verificar si el archivo existe
+    if not os.path.exists(ARCHIVO_DE_IMAGEN):
+        mensaje = (f"No se encontro la imagen: '{ARCHIVO_DE_IMAGEN}'\n\n"
+                   "Por favor, revisa:\n"
+                   "1. Que el nombre este bien escrito.\n"
+                   "2. Que la imagen este en la misma carpeta que este script.\n"
+                   "3. Que la extension sea la correcta.")
+        mostrar_error(mensaje)
+        return
 
+    try:
+        # Procesamiento de la imagen usando la clase ProcesadorPlanos, esto hace que el codigo principal sea mas limpio
+        procesador = ProcesadorPlanos(ARCHIVO_DE_IMAGEN)
+        final = procesador.ejecutar()
 
-# Definir la ruta de la imagen uniendo el directorio actual con la ubicación interna
-# Define the image path by joining the current directory with the internal location
-"""
-SOLO MUEVE AQUI / ONLY MOVE HERE 
+        # Configurar la ventana de visualización
+        fig = plt.figure(figsize=(10, 10))
+        
+        # Título de la ventana
+        fig.canvas.manager.set_window_title(f"Visualizador de Planos: {ARCHIVO_DE_IMAGEN}")
+        
+        # Enseñar la imagen procesada con un título que incluya el nombre del archivo
+        plt.imshow(cv2.cvtColor(final, cv2.COLOR_BGR2RGB))
+        plt.title(f"IMAGEN PROCESADA CON LOS BORDES Y ESQUINAS", fontsize=18, fontweight='bold', color='Purple')
+        plt.axis('off')
+        plt.show()
+        
 
-Solo quita el '#' de la línea que quieras probar, requerda que solo se puede usar una imagen a la vez, 2 de ellas ocupan el #:
-Just remove the '#' from the line you want to test. Remember that only one image can be used at a time; two images occupy the #:
-"""
-ruta = os.path.join(Directorio_Actual, "src", "vision", "Plano_1.png")
-# ruta = os.path.join(Directorio_Actual, "src", "vision", "Plano_2.jpg")
-# ruta = os.path.join(Directorio_Actual, "src", "vision", "Plano_3.jpg")
+    except Exception as e:
+        mostrar_error(f"Ocurrio un error inesperado al procesar la imagen:\n{str(e)}")
 
-
-
-
-#Mandamos a llamar la primera funcion, que nos va a devolver las dos imagenes limpias que necesitamos para la segunda funcion
-#We called the first function, which will return the two clean images we need for the second function.
-Imagen_Rotada, Imagen_Limpiada = Preparar_Plano(ruta)
-
-#Ahora que ya existen, se las pasamos a la segunda función que se encarga de detectar las caracteristicas estructurales del plano.
-#Now that they already exist, we pass them to the second function that is responsible for detecting the structural characteristics of the plan.
-resultado = Detectar_caracteristicas(Imagen_Rotada, Imagen_Limpiada)
-
-#Mensaje para confirmar que todo se ha importado correctamente.
-#Message to confirm that everything has been imported correctly.
-print("Importacion y exitosa.")
-
-#Usamos np.hstack para poner las comparaciones juntos.
-#We use np.hstack to put the comparisons together.
-comparativa = np.hstack((Imagen_Rotada, resultado))
-
-#Mostrar la ventana
-#Show the window
-cv2.imshow('Proyecto Final: Deteccion Estructural', comparativa)
-cv2.waitKey(0) 
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    ejecutar_analisis()
