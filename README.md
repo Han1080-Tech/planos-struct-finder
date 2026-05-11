@@ -116,7 +116,7 @@ name-of-your-proyect/
     └── mi_plano.png             <-- Tu imagen (Ponla aquí / Place it here)
 
 ```
-<img src="https://github.com/user-attachments/assets/f3bd5a2f-6f61-4059-a3c0-f7c275e26c3f" width="600">
+<img src="https://github.com/user-attachments/assets/c4ff78ad-3e4b-4a79-a539-bff92d9e5267" width="600">
 
 ### Nota / Note:
 
@@ -138,8 +138,12 @@ import cv2
 import matplotlib.pyplot as plt
 import os
 import tkinter as tk
+import os
 from tkinter import messagebox
 from vision.deteccion import ProcesadorPlanos
+
+# Esto detecta automáticamente la carpeta donde está guardado este script
+DIRECTORIO_ACTUAL = os.path.dirname(os.path.abspath(__file__))
 
 # ==========================================================
 # 1. CONFIGURACION DE USUARIO (Cambia el nombre aqui)
@@ -148,15 +152,17 @@ from vision.deteccion import ProcesadorPlanos
 # del archivo sea correcto y que la imagen este en la misma 
 # carpeta que este script   
 # ==========================================================
-ARCHIVO_DE_IMAGEN = "Plano_4.png"                         #= <-- Cambia el nombre del archivo de imagen aqui (ejemplo: "Plano_1.png")
+NOMBRE_IMAGEN = "Plano_4.png"                         #= <-- Cambia el nombre del archivo de imagen aqui (ejemplo: "Plano_1.png")
 # ==========================================================
 
+ARCHIVO_DE_IMAGEN = os.path.join(DIRECTORIO_ACTUAL, NOMBRE_IMAGEN)
 #Crear pantalla de error personalizada para mostrar mensajes de error de forma mas amigable y como solucionarlo
-def mostrar_error(mensaje):
-    root = tk.Tk()
-    root.withdraw() 
-    messagebox.showerror("Error de Archivo", mensaje)
-    root.destroy()
+if not os.path.exists(ARCHIVO_DE_IMAGEN):
+    def mostrar_error(mensaje):
+        root = tk.Tk()
+        root.withdraw() 
+        messagebox.showerror("Error de Archivo", mensaje)
+        root.destroy()
 
 def ejecutar_analisis():
     # Verificar si el archivo existe
@@ -193,6 +199,14 @@ def ejecutar_analisis():
 if __name__ == "__main__":
     ejecutar_analisis()
 ```
+
+⏳ ES: Nota sobre el tiempo de carga
+Al abrir el proyecto por primera vez, es normal que tu editor (VS Code/Spyder) muestre advertencias o subrayados en el código. Esto se debe a que las librerías de visión artificial (opencv, numpy) son pesadas y el sistema está terminando de indexarlas. No te preocupes, el programa funcionará correctamente una vez finalizada la configuración inicial.
+
+⏳ EN: Note on Loading Time
+When opening the project for the first time, your editor (VS Code/Spyder) might show warnings or underlines in the code. This is normal, as computer vision libraries (opencv, numpy) are large, and the system is finishing their indexing. Do not worry; the program will work correctly once the initial setup is complete.
+
+
 ### ES: Solución de Problemas (Pantalla Emergente)
 Si el sistema no logra detectar la imagen, se desplegará automáticamente un asistente visual que te sugerirá lo siguiente:
 
@@ -211,7 +225,7 @@ Syntax: Ensure the filename is written exactly as it appears in the code (respec
 
 Existence: Confirm that the file actually exists and hasn't been moved or deleted.
 
-<img src="https://github.com/user-attachments/assets/c4ff78ad-3e4b-4a79-a539-bff92d9e5267" width="600">
+<img src="https://github.com/user-attachments/assets/21feb454-d780-4faf-b341-bab20e43f68b" width="600">
 
 ## 📊 Resultados / Results 
 
