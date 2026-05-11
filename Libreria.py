@@ -1,3 +1,24 @@
+"""
+====================================================================
+=  PROYECTO 3                                                      =
+=  DESARROLLO DE UNA LIBRERIA EN PYTHON PARA LA DETECCION DE       =
+=  LINEAS, ESQUINAS E INTERSECCIONES EN PLANOS ARQUITECTONICOS     =
+=                                                                  =
+= Este proyecto es un detector de lineas y bordes en imagenes de   = 
+= planos arquitectonicos, usa funciones de OpenCV para el          =
+= procesamiento de la imagen, y esta organizado en una clase para  =
+= facilitar su uso, ademas de tener un codigo limpio y facil de    =
+= entender, el usuario solo tiene que cambiar el nombre del archivo= 
+= de imagen que quiere analizar y ejecutar el script para ver los  =
+= resultados.                                                      =
+====================================================================
+  INTEGRANTES:
+  - HAN APESS ESPARZA
+  - ARMANDO DUARTE ESPARZA
+  - IKER EDUARDO FIGUEROA GARCIA
+  - JOSE IVAN RODRIGUEZ VALTIERRA                                                  
+"""
+
 import cv2
 import matplotlib.pyplot as plt
 import os
